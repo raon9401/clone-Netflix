@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import AppLayout from "./layout/AppLayout";
+import HomePage from "./pages/Home/HomePage";
+import MoviePage from "./pages/Movies/MoviePage";
+import MovieDetailPage from "./pages/MovieDetail/MovieDetailPage";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+// 홈페이지 : '/'
+// 영화 리스트 : '/movies'
+// 영화 상세 페이지 : '/movies/:id'
+// 추천 영화 : '/movies/:id/recommandation'
+// 리뷰 : '/movies/:id/reviews'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<AppLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="/movies">
+          <Route index element={<MoviePage />} />
+          <Route path=":id" element={<MovieDetailPage />} />
+        </Route>
+      </Route>
+
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 }
 
