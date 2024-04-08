@@ -1,8 +1,8 @@
 .banner{
-    height: 100vh;
+    height: 80vh;
     background-repeat: no-repeat;
     background-size: 100%;
-    background-position: center;
+    background-position: top;
 }
 
 /* 그라데이션 효과 */
@@ -11,7 +11,7 @@
     background: linear-gradient(to top, black, transparent);
     position: absolute;
     left: 0;
-    height: 100vh;
+    height: 80vh;
     width: 100%;
 }
 
