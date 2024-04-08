@@ -16,7 +16,7 @@
 }
 
 .banner-text-area{
-    width: 100%;
+    width: 40vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,6 +31,10 @@
 @media (max-width:900px) {
     .banner, .banner:before{
         height: 50vh;
+    }
+
+    .banner-text-area{
+        width: 100%;
     }
 }
 
