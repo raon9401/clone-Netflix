@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGenresQuery, usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
+import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
 import Alert from "react-bootstrap/Alert"
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -10,15 +10,15 @@ import "./PopularMovieSlide.style.css"
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 6,
+    items: 6
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 2
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
+    items: 1
   }
 };
 
