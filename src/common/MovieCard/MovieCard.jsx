@@ -1,13 +1,24 @@
 import React from 'react'
 import "./MovieCard.style.css"
-import { BANNER_BASE_URL } from '../../../../const/URL'
+import { BANNER_BASE_URL } from '../../const/URL'
 import Badge from 'react-bootstrap/Badge';
-import AgeIcon from '../../../../common/icon/AgeIcon/AgeIcon';
+import AgeIcon from '../../common/icon/AgeIcon/AgeIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { useGenresQuery } from '../../hooks/useMovieGenre';
 
 const MovieCard = ({movie}) => {
+  const {data:genreData} = useGenresQuery();
+  
+  const showGenre = (genreIdList) =>{
+    const genreNameList = genreIdList.map((id) => {
+        const genreObj = genreData.find((genre) => genre.id === id)
+        return genreObj.name;
+    })
 
+    return genreNameList;
+  }
+  
   return (
     <div 
         style={{backgroundImage:`url("${BANNER_BASE_URL}${movie.poster_path}")`}}
@@ -15,11 +26,17 @@ const MovieCard = ({movie}) => {
             <div className='overlay'>
                     <h4>{movie.title}</h4>
                 <div className="genre-box">
-                    {movie.genre_ids.map((id,index)=> (
+                    {genreData && showGenre(movie.genre_ids).map((id,index)=> (
                         <Badge bg="danger" key={index}>
                             {id}
                         </Badge>))
                     }
+
+                    {/* {movie.genre_ids.map((id,index)=> (
+                        <Badge bg="danger" key={index}>
+                            {id}
+                        </Badge>))
+                    } */}
                 </div>
                 <div className='movie-info-area'>
                     <div className="movie-info-text-box">
