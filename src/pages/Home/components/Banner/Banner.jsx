@@ -1,5 +1,5 @@
 import React from 'react'
-import { usePopularMoviesQuery } from '../../../../hooks/usePopularMovies'
+import { usePopularMoviesQuery } from '../../../../hooks/useMovies'
 import Alert from "react-bootstrap/Alert"
 import { BANNER_BASE_URL } from '../../../../const/URL';
 import "./Banner.style.css";
