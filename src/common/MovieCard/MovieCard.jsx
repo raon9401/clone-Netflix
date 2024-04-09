@@ -1,13 +1,12 @@
 import React from 'react'
 import "./MovieCard.style.css"
-import { BANNER_BASE_URL } from '../../../../const/URL'
+import { BANNER_BASE_URL } from '../../const/URL'
 import Badge from 'react-bootstrap/Badge';
-import AgeIcon from '../../../../common/icon/AgeIcon/AgeIcon';
+import AgeIcon from '../../common/icon/AgeIcon/AgeIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 
 const MovieCard = ({movie}) => {
-
   return (
     <div 
         style={{backgroundImage:`url("${BANNER_BASE_URL}${movie.poster_path}")`}}
