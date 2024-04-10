@@ -1,6 +1,6 @@
 import React from 'react'
 import "./MovieCard.style.css"
-import { BANNER_BASE_URL } from '../../const/URL'
+import {  MOVIE_CARD_URL } from '../../const/URL'
 import Badge from 'react-bootstrap/Badge';
 import AgeIcon from '../../common/icon/AgeIcon/AgeIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,6 @@ import { useGenresQuery } from '../../hooks/useMovieGenre';
 
 const MovieCard = ({movie}) => {
   const {data:genreData} = useGenresQuery();
-  
   const showGenre = (genreIdList) =>{
     const genreNameList = genreIdList.map((id) => {
         const genreObj = genreData.find((genre) => genre.id === id)
@@ -18,10 +17,13 @@ const MovieCard = ({movie}) => {
 
     return genreNameList;
   }
+
+
+  console.log(movie);
   
   return (
     <div 
-        style={{backgroundImage:`url("${BANNER_BASE_URL}${movie.poster_path}")`}}
+        style={{backgroundImage:`url("${MOVIE_CARD_URL}${movie.poster_path}")`}}
         className='movie-card'>
             <div className='overlay'>
                     <h4>{movie.title}</h4>
