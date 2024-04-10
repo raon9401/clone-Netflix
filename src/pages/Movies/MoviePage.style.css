@@ -1,0 +1,7 @@
+.movie-contents-area{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    padding-bottom: 20px;
+}
