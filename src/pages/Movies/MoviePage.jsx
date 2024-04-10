@@ -1,6 +1,6 @@
 import "./MoviePage.style.css"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSearchMovieQuery } from '../../hooks/useSearchMovie'
 import { useSearchParams } from 'react-router-dom';
 import Alert from "react-bootstrap/Alert"
@@ -10,6 +10,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MovieCard from '../../common/MovieCard/MovieCard';
 import ReactPaginate from 'react-paginate';
+import Dropdown from 'react-bootstrap/Dropdown';
+import Badge from 'react-bootstrap/Badge';
+import Stack from 'react-bootstrap/Stack';
+import CloseButton from 'react-bootstrap/CloseButton';
+import { useGenresQuery } from "../../hooks/useMovieGenre";
 
 // keyword에 따른 2가지 상태
 // 1. keyword가 없는 경우 - navbar에서 이동
@@ -20,18 +25,31 @@ import ReactPaginate from 'react-paginate';
 const MoviePage = () => {
   // eslint-disable-next-line
   const [query, setQuery] = useSearchParams();
+  const [filterList, setFilterList] = useState([]);
   const [page, setPage] = useState(1);
 
   const keyword = query.get("q");
 
-  const {data,isLoading, isError, error }= useSearchMovieQuery({keyword,page});
+  const {data, isLoading, isError, error }= useSearchMovieQuery({keyword,page});
+  const {data:genreData} = useGenresQuery(); 
 
   const handlePageClick = ({selected}) => {
     setPage(selected+1);
   }
 
+  const handleFilterList = (item) => {
+    setFilterList([...filterList,item.name]);
+  }
 
-  console.log(data);
+  const handleFilterListDelete = (index) => {
+    const filterArr = filterList.filter((el,idx) => idx !== index);
+    setFilterList(filterArr);
+  }
+
+  useEffect(() => {
+    setFilterList([]);
+  },[])
+
   if(isLoading) {
     <div className="spinner-area">
       <Spinner
@@ -48,9 +66,35 @@ const MoviePage = () => {
   return (
     <Container>
       <Row>
+        {/* Filter */}
         <Col lg={4} xs={12}>
-          필터 공간
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Filter Genres
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {genreData && genreData.map((item, index ) => (
+                <Dropdown.Item 
+                  key={index}  
+                  onClick={() => handleFilterList(item)} 
+                  style={{display: filterList.includes(item.name) ? "none" : "block"}}
+                  disabled={filterList.includes(item.name)} 
+                  >
+                    {item.name}
+                  </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          <Stack className="pt-2 d-flex flex-wrap" direction="horizontal" gap={2}>
+            {filterList.map((item, index) => (
+              <Badge bg="danger" className="justify-content-center align-items-center d-flex" key={index}>
+                {item}<CloseButton onClick={() => handleFilterListDelete(index)}/>
+              </Badge>
+            ))}
+          </Stack>
         </Col>
+        {/* movie contents */}
         <Col lg={8} xs={12} className='movie-contents-area'>
           <Row>
           {data?.results.map((movie, index) =>
