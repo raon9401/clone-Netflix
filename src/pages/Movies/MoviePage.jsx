@@ -1,3 +1,5 @@
+import "./MoviePage.style.css"
+
 import React, { useState } from 'react'
 import { useSearchMovieQuery } from '../../hooks/useSearchMovie'
 import { useSearchParams } from 'react-router-dom';
@@ -46,11 +48,13 @@ const MoviePage = () => {
   return (
     <Container>
       <Row>
-        <Col lg={4} xs={12}>필터</Col>
+        <Col lg={4} xs={12}>
+          필터 공간
+        </Col>
         <Col lg={8} xs={12} className='movie-contents-area'>
           <Row>
           {data?.results.map((movie, index) =>
-            <Col key={index} lg={4} xs={12}>
+            <Col className='justify-content-center d-flex' key={index} lg={3} md={4} sm={6} xs={12}>
               <MovieCard movie={movie}/>
             </Col>
           )}
