@@ -6,25 +6,31 @@ import AgeIcon from '../../common/icon/AgeIcon/AgeIcon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { useGenresQuery } from '../../hooks/useMovieGenre';
+import {useNavigate } from 'react-router-dom'
 
 const MovieCard = ({movie}) => {
-  const {data:genreData} = useGenresQuery();
-  const showGenre = (genreIdList) =>{
-    const genreNameList = genreIdList.map((id) => {
-        const genreObj = genreData.find((genre) => genre.id === id)
-        return genreObj.name;
-    })
+    const navigate = useNavigate();
+    const {data:genreData} = useGenresQuery();
+    const showGenre = (genreIdList) =>{
+      const genreNameList = genreIdList.map((id) => {
+          const genreObj = genreData.find((genre) => genre.id === id)
+          return genreObj.name;
+      })
 
-    return genreNameList;
-  }
+      return genreNameList;
+    }
 
-
-  console.log(movie);
+    const detailPageNav = () => {
+        console.log(movie);
+        navigate(`/movies/${movie.id}`)
+    }
   
   return (
     <div 
         style={{backgroundImage:`url("${MOVIE_CARD_URL}${movie.poster_path}")`}}
-        className='movie-card'>
+        className='movie-card'
+        onClick={detailPageNav}
+        >
             <div className='overlay'>
                     <h4>{movie.title}</h4>
                 <div className="genre-box">
