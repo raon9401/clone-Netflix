@@ -59,13 +59,13 @@ const MoviePage = () => {
 
   const handleMovieListSort = (dataArr) => {
     // sort function
-    if(sortOption === "popularity.asc"){
+    if(sortOption?.sort_keyword === "popularity.asc"){
       return dataArr.sort((a,b) => a.popularity - b.popularity);
-    } else if(sortOption === "popularity.desc") {
+    } else if(sortOption?.sort_keyword === "popularity.desc") {
       return dataArr.sort((a,b) => b.popularity - a.popularity);
-    } else if(sortOption === "vote_average.asc") {
+    } else if(sortOption?.sort_keyword === "vote_average.asc") {
       return dataArr.sort((a,b) => a.vote_average - b.vote_average);
-    } else if(sortOption === "vote_average.desc") {
+    } else if(sortOption?.sort_keyword === "vote_average.desc") {
       return dataArr.sort((a,b) => b.vote_average - a.vote_average);
     } else {
       return dataArr;
@@ -73,7 +73,7 @@ const MoviePage = () => {
   }
 
   const handleSortOption = (sortItem) => {
-    setSortOption(sortItem.sort_keyword);
+    setSortOption(sortItem);
   }
 
 
@@ -124,7 +124,7 @@ const MoviePage = () => {
             {/* Sort Dropdown*/}
             <Dropdown>
               <Dropdown.Toggle variant="outline-warning" id="dropdown-basic">
-                {sortOption ?  sortOption : "Select Sort" }
+                {sortOption ?  sortOption.name : "Select Sort" }
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
