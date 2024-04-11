@@ -17,9 +17,6 @@ const MovieCard = ({movie}) => {
 
     return genreNameList;
   }
-
-
-  console.log(movie);
   
   return (
     <div 

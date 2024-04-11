@@ -30,15 +30,14 @@ const MoviePage = () => {
 
   const keyword = query.get("q");
 
-  const {data, isLoading, isError, error }= useSearchMovieQuery({keyword,page});
+  const {data:movieData, isLoading, isError, error }= useSearchMovieQuery({keyword,page});
   const {data:genreData} = useGenresQuery(); 
-
   const handlePageClick = ({selected}) => {
     setPage(selected+1);
   }
 
   const handleFilterList = (item) => {
-    setFilterList([...filterList,item.name]);
+    setFilterList([...filterList,{name:item.name, id:item.id}]);
   }
 
   const handleFilterListDelete = (index) => {
@@ -46,9 +45,23 @@ const MoviePage = () => {
     setFilterList(filterArr);
   }
 
+  const handleMovieListFilter = (genreIdList) => {
+    // console.log(genreIdList);
+    console.log(filterList.some(el => genreIdList.includes(el.id)));
+    return filterList.some(el => !genreIdList.includes(el.id))
+    // const 
+  }
+
+
   useEffect(() => {
     setFilterList([]);
-  },[])
+  },[query])
+
+  // useEffect(() => {
+    // 
+  // },[filterList])
+
+
 
   if(isLoading) {
     <div className="spinner-area">
@@ -78,8 +91,7 @@ const MoviePage = () => {
                 <Dropdown.Item 
                   key={index}  
                   onClick={() => handleFilterList(item)} 
-                  style={{display: filterList.includes(item.name) ? "none" : "block"}}
-                  disabled={filterList.includes(item.name)} 
+                  style={{display: filterList.some(el => el.name === item.name) ? "none" : "block"}}
                   >
                     {item.name}
                   </Dropdown.Item>
@@ -89,7 +101,7 @@ const MoviePage = () => {
           <Stack className="pt-2 d-flex flex-wrap" direction="horizontal" gap={2}>
             {filterList.map((item, index) => (
               <Badge bg="danger" className="justify-content-center align-items-center d-flex" key={index}>
-                {item}<CloseButton onClick={() => handleFilterListDelete(index)}/>
+                {item.name}<CloseButton onClick={() => handleFilterListDelete(index)}/>
               </Badge>
             ))}
           </Stack>
@@ -97,8 +109,11 @@ const MoviePage = () => {
         {/* movie contents */}
         <Col lg={8} xs={12} className='movie-contents-area'>
           <Row>
-          {data?.results.map((movie, index) =>
-            <Col className='justify-content-center d-flex' key={index} lg={3} md={4} sm={6} xs={12}>
+          {movieData?.results.map((movie, index) =>
+            <Col className={`justify-content-center ${handleMovieListFilter(movie.genre_ids) ? "d-none" : "d-flex"}`}
+              key={index} 
+              lg={3} md={4} sm={6} xs={12}
+            >
               <MovieCard movie={movie}/>
             </Col>
           )}
@@ -110,7 +125,7 @@ const MoviePage = () => {
             onPageChange={handlePageClick}
             pageRangeDisplayed={3}
             marginPagesDisplayed={2}
-            pageCount={data?.total_pages}
+            pageCount={movieData?.total_pages}
             pageClassName="page-item"
             pageLinkClassName="page-link"
             previousClassName="page-item"
