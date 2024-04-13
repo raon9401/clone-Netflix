@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Badge, Button } from 'react-bootstrap'
 import "./DetailInfo.style.css"
 import AgeIcon from '../../../../common/icon/AgeIcon/AgeIcon'
@@ -6,8 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { handleKeyAndValue } from '../../hooks/handleKeyAndValue'
 import KeyAndValue from '../common/KeyAndValue'
+import PreviewModal from '../../../../common/PreviewModal/PreviewModal'
 
-const DetailInfo = ({movieDetail}) => {
+const DetailInfo = ({movieDetail, id}) => {
+  const [show, setShow] = useState(false);
+  const handlePreviewModal = () => {
+    setShow(true);
+  }
 
   const KeyAndValueArr = movieDetail && handleKeyAndValue(movieDetail);
   return (
@@ -22,7 +27,7 @@ const DetailInfo = ({movieDetail}) => {
         <article>
             {/* 타이틀, 예고편 modal */}
             <h1>{movieDetail.title}</h1>
-            <Button>예고편</Button>
+            <Button onClick={() => handlePreviewModal()}>예고편</Button>
         </article>
         <article className="d-flex column-gap-3">
             {/* 평점, 인기도, 연령 */}
@@ -48,6 +53,8 @@ const DetailInfo = ({movieDetail}) => {
                 <KeyAndValue objectProps={item} key={index}/>
             )}
         </article>
+        <PreviewModal id={id} show={show} setShow={setShow}/>
+
     </section>
   )
 }

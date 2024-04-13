@@ -58,7 +58,7 @@ const MovieDetailPage = () => {
           </Col>
           <Col lg={8} xs={12}>
             {/* movie detail info */}
-            <DetailInfo movieDetail={movieDetail}/>
+            <DetailInfo id={id} movieDetail={movieDetail}/>
           </Col>
         </Row>
         <div className='d-flex column-gap-2 mt-2 mb-2'>

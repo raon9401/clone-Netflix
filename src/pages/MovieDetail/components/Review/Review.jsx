@@ -2,7 +2,7 @@ import "./Review.style.css"
 import React from 'react'
 import { useMovieReviewQuery } from '../../../../hooks/useMovieReview';
 import { Alert, Col, Container, Row, Spinner } from 'react-bootstrap';
-import ReviewText from "./ReviewText";
+import ReviewText from "./components/ReviewText";
 
 const Review = ({id}) => {
   const { data:movieReview, isLoading, isError, error } = useMovieReviewQuery({id});
