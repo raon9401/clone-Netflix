@@ -16,7 +16,7 @@ const MovieSlider = ({title, movies, responsive}) => {
           itemClass='movie-slider p-1'
           containerClass='carousel-container'
           responsive={responsive}
-          removeArrowOnDeviceType={["tablet", "mobile"]}
+          removeArrowOnDeviceType={["mobile"]}
           autoPlaySpeed={5000}
           autoPlay={true}
         >

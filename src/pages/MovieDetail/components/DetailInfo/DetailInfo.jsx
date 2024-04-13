@@ -27,7 +27,7 @@ const DetailInfo = ({movieDetail, id}) => {
         <article>
             {/* 타이틀, 예고편 modal */}
             <h1>{movieDetail.title}</h1>
-            <Button onClick={() => handlePreviewModal()}>예고편</Button>
+            <Button onClick={() => handlePreviewModal()}>Trailer</Button>
         </article>
         <article className="d-flex column-gap-3">
             {/* 평점, 인기도, 연령 */}
