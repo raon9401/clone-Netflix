@@ -21,7 +21,7 @@ const MovieCard = ({movie}) => {
     }
 
     const detailPageNav = () => {
-        console.log(movie);
+        // console.log(movie);
         navigate(`/movies/${movie.id}`)
     }
   
