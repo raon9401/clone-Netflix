@@ -1,0 +1,16 @@
+.genres-area{
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.movie-info-text-wrap > svg{
+    color:yellow;
+}
+
+.overview-text-box{
+    border-top: 2px solid grey;
+    border-bottom: 2px solid grey;
+    margin: 5px 0px 5px 0px;
+    padding: 4% 0 4% 0;
+}

@@ -3,3 +3,9 @@ body{
   background-color: black !important;
   color: white !important;
 }
+
+.movie-info-text-wrap{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

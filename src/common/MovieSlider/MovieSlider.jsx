@@ -12,10 +12,11 @@ const MovieSlider = ({title, movies, responsive}) => {
         {movies && <Carousel
           infinite={true}
           centerMode={true}
+          draggable={false}
           itemClass='movie-slider p-1'
           containerClass='carousel-container'
           responsive={responsive}
-          removeArrowOnDeviceType={["desktop","tablet", "mobile"]}
+          removeArrowOnDeviceType={["tablet", "mobile"]}
           autoPlaySpeed={5000}
           autoPlay={true}
         >

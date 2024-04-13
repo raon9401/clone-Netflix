@@ -53,11 +53,7 @@
     justify-content: space-between;
 }
 
-.movie-info-text-box  .movie-info-text-wrap{
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
+
 
 
 @media (max-width:900px) {
