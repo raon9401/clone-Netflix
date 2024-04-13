@@ -26,12 +26,15 @@ const PreviewModal = ({show, setShow, id}) => {
   return (
     <div>
         <Modal className='' show={show} fullscreen={true} onHide={() => setShow(false)}>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton className=''>
             </Modal.Header>
-            <Modal.Body className="p-0">
+            <Modal.Body className="p-0 bg-black">
               <YouTube
               //videoId : https://www.youtube.com/watch?v={videoId} 유튜브 링크의 끝부분에 있는 고유한 아이디
-                videoId={data?.filter((item) => item.type === "Trailer")[0]?.key ? data?.filter((item) => item.type === "Trailer")[0]?.key : data && data[0].key}
+                videoId={data?.filter((item) => 
+                    item.type === "Trailer")[0]?.key ? data?.filter((item) => 
+                      item.type === "Trailer")[0]?.key : data && data[0].key
+                }
               //opts(옵션들): 플레이어의 크기나 다양한 플레이어 매개 변수를 사용할 수 있음.
               //밑에서 더 설명하겠습니다.
                 opts={{
