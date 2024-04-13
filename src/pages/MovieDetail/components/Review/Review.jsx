@@ -33,7 +33,7 @@ const Review = ({id}) => {
                             <h5>{item.author_details.username}</h5>
                         </Col>
                         <Col lg={5} className="text-end">
-                            {item.updated_at}
+                            {item.updated_at.split("T")[0]}
                         </Col>
                     </Row>
                     <Row className="p-3">
